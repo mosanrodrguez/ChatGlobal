@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class ChatRepository(context: Context, token: String) {
-    private val db = AppDatabase.getInstance(context)
+    private val db = AppDatabase.get(context)
     private val api = RetrofitClient.api
     private val ws = WebSocketManager(token)
 
@@ -20,7 +20,8 @@ class ChatRepository(context: Context, token: String) {
 
     fun observeMessages(): Flow<List<MessageUiModel>> {
         return db.dao().getAll().map { list ->
-            list.map { e ->                MessageUiModel(
+            list.map { e ->
+                MessageUiModel(
                     id = e.id,
                     content = e.content,
                     timestamp = e.timestamp,
@@ -32,8 +33,7 @@ class ChatRepository(context: Context, token: String) {
                         "sending" -> MessageStatus.Sending
                         "delivered" -> MessageStatus.Delivered
                         "seen" -> MessageStatus.Seen
-                        else -> MessageStatus.Sent
-                    }
+                        else -> MessageStatus.Sent                    }
                 )
             }
         }
@@ -69,7 +69,8 @@ class ChatRepository(context: Context, token: String) {
                 content = content,
                 timestamp = "",
                 isSent = true,
-                status = "sending",                senderName = "Tú",
+                status = "sending",
+                senderName = "Tú",
                 senderAvatarUrl = null
             )
         )

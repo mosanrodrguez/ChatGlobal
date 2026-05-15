@@ -1,14 +1,7 @@
 package com.chatglobal.presentation.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -25,7 +18,6 @@ import com.chatglobal.presentation.theme.BlackText
 import com.chatglobal.presentation.theme.GrayText
 import com.chatglobal.presentation.theme.White
 import com.chatglobal.presentation.theme.WineBlue
-import com.chatglobal.R
 
 @Composable
 fun ReceivedBubble(
@@ -37,14 +29,10 @@ fun ReceivedBubble(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier
-            .padding(start = 8.dp, end = 60.dp, top = 4.dp, bottom = 4.dp)
-    ) {
-        if (showInfo) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 2.dp)
-            ) {                AvatarPlaceholder(name = name, size = 20)
+        modifier = modifier.padding(start = 8.dp, end = 60.dp, top = 4.dp, bottom = 4.dp)
+    ) {        if (showInfo) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(bottom = 2.dp)) {
+                AvatarPlaceholder(name = name, size = 20)
                 Spacer(Modifier.width(4.dp))
                 Text(text = name, fontSize = 11.sp, color = GrayText)
             }
@@ -77,8 +65,7 @@ fun SentBubble(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier
-            .padding(start = 60.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
+        modifier = modifier.padding(start = 60.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
         horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.Bottom
     ) {
@@ -92,12 +79,9 @@ fun SentBubble(
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.End
             ) {
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(text = msg, color = BlackText, fontSize = 14.sp)                    Spacer(Modifier.height(4.dp))
-                    Row(
-                        verticalAlignment = Alignment.Bottom,
-                        horizontalArrangement = Arrangement.End
-                    ) {
+                Column(horizontalAlignment = Alignment.End) {                    Text(text = msg, color = BlackText, fontSize = 14.sp)
+                    Spacer(Modifier.height(4.dp))
+                    Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.End) {
                         Icon(
                             painter = painterResource(id = status.iconRes),
                             contentDescription = null,
